@@ -1,10 +1,12 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, webkit } from "@playwright/test";
 import dotenv from "dotenv";
 
 // Read from default ".env" file.
 dotenv.config();
 
 test("login for dingding", async ({ page, context }) => {
+  context.setDefaultTimeout(60000);
+
   await page.goto("https://home.coscene.cn");
   await expect(page).toHaveURL(/.*sso.coscene.cn/);
   const loginBtn = page.getByRole("button", {
@@ -42,6 +44,8 @@ test("login for dingding", async ({ page, context }) => {
 });
 
 test("login for Lark", async ({ page, context }) => {
+  context.setDefaultTimeout(60000);
+
   await page.goto("https://home.coscene.cn");
   await expect(page).toHaveURL(/.*sso.coscene.cn/);
   const loginBtn = page.getByRole("button", {
