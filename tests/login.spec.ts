@@ -1,4 +1,8 @@
 import { test, expect } from "@playwright/test";
+import dotenv from "dotenv";
+
+// Read from default ".env" file.
+dotenv.config();
 
 test("login for dingding", async ({ page, context }) => {
   await page.goto("https://home.coscene.cn");
@@ -11,17 +15,18 @@ test("login for dingding", async ({ page, context }) => {
 
   await expect(page).toHaveURL(/.*login.dingtalk.com/);
 
+  await page.getByText("Scan with DingTalk", { exact: true }).isVisible();
+
   await context.addCookies([
     {
       name: "deviceid",
-      value: "0349ee65b5064529b9b6272f6a1d3f35",
+      value: process.env.CN_DINGDING_DEVICE_ID || "",
       domain: "login.dingtalk.com",
       path: "/",
     },
     {
       name: "account",
-      value:
-        "oauth_k1%3ALi5Sd4YieYRpia%2B%2FlL5STumZux4nxpgjaAE8xFXCR%2BA%2Bn8RJAH8g2v2cnYQZe1lTPo1BJRJBXsnYNyouYPYb0jp43HNOqzafTk2Nx6qivS0%3D",
+      value: process.env.CN_DINGDING_ACCOUNT || "",
       domain: "login.dingtalk.com",
       path: "/",
     },
@@ -47,16 +52,20 @@ test("login for Lark", async ({ page, context }) => {
 
   await expect(page).toHaveURL(/.*passport.feishu.cn/);
 
+  await page.getByText("Scan QR Code", { exact: true }).isVisible();
+
   await context.addCookies([
     {
       name: "session",
-      value: "XN0YXJ0-0aej10d2-c69e-40fe-ac90-d8c7dfdf8084-WVuZA",
+      value: process.env.CN_LARK_LOGIN_SESSION || "",
       domain: "passport.feishu.cn",
       path: "/",
     },
   ]);
 
   await page.goBack();
+
+  await page.getByText("Sign in with Feishu", { exact: true }).isVisible();
 
   await loginBtn.click();
 

@@ -4,21 +4,27 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
+  workflow_dispatch:
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
+          cache: "pnpm"
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm i
       - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
+        run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npx playwright test --headed --project=chromium
+        run: CN_DINGDING_ACCOUNT=${{ secrets.CN_DINGDING_ACCOUNT }} CN_DINGDING_DEVICE_ID=${{ secrets.CN_DINGDING_DEVICE_ID }} CN_LARK_LOGIN_SESSION=${{ secrets.CN_LARK_LOGIN_SESSION }} npx playwright test
       - uses: actions/upload-artifact@v3
         if: always()
         with:
