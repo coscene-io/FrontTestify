@@ -1,4 +1,4 @@
-import { test, expect, webkit } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import dotenv from "dotenv";
 
 // Read from default ".env" file.
