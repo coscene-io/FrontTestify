@@ -24,7 +24,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: CN_DINGDING_ACCOUNT=${{ secrets.CN_DINGDING_ACCOUNT }} CN_DINGDING_DEVICE_ID=${{ secrets.CN_DINGDING_DEVICE_ID }} CN_LARK_LOGIN_SESSION=${{ secrets.CN_LARK_LOGIN_SESSION }} npx playwright test
+        run: CN_DINGDING_ACCOUNT=${{ secrets.CN_DINGDING_ACCOUNT }} CN_DINGDING_DEVICE_ID=${{ secrets.CN_DINGDING_DEVICE_ID }} CN_LARK_LOGIN_SESSION=${{ secrets.CN_LARK_LOGIN_SESSION }} CN_JWT=${{ secrets.CN_JWT }} npx playwright test
       - uses: actions/upload-artifact@v3
         if: always()
         with:
