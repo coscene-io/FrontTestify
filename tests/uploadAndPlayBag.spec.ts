@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import 'dotenv/config'
 
 test.beforeEach(async ({page}) => {
     await page.goto("https://staging.coscene.cn/coscene-lark/e2e/records")
@@ -8,12 +9,12 @@ test.beforeEach(async ({page}) => {
     await page.goto("https://staging.coscene.cn/coscene-lark/e2e/records")
 })
 
-test('Unzip and play bag', async ({page,context}) => {
+test('Upload and play bag', async ({page,context}) => {
     await page.getByText('Create Record', {exact: true}).click();
 
     const inputElement = await page.$('input[placeholder="Input record name"]');
 
-    await inputElement?.fill('Unzip and play bag-' + Date.now());
+    await inputElement?.fill('Upload and play bag-' + Date.now());
 
     await page.getByText('Confirm', {exact: true}).click();
 
