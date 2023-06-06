@@ -1,59 +1,87 @@
 import { test, expect } from "@playwright/test";
-import 'dotenv/config'
 
-test.beforeEach(async ({page}) => {
-    await page.goto("https://staging.coscene.cn/coscene-lark/e2e/records")
-    await page.evaluate(() => {
-        localStorage.setItem('coScene_org_jwt', process.env.CN_JWT);
-    });
-    await page.goto("https://staging.coscene.cn/coscene-lark/e2e/records")
-})
+test.beforeEach(async ({ page }) => {
+  await page.goto("https://staging.coscene.cn/coscene-lark/e2e/records");
+  await page.evaluate(() => {
+    localStorage.setItem("coScene_org_jwt", process.env.CN_JWT);
+    localStorage.setItem("i18nextLng", "en");
+  });
 
-test('Upload and play bag', async ({page,context}) => {
-    await page.getByText('Create Record', {exact: true}).click();
+  await page.goto("https://staging.coscene.cn/coscene-lark/e2e/records", {
+    timeout: 3 * 60 * 1000,
+  });
+});
 
-    const inputElement = await page.$('input[placeholder="Input record name"]');
+test("Upload and play bag", async ({ page, context }) => {
+  test.setTimeout(5 * 60 * 1000);
 
-    await inputElement?.fill('Upload and play bag-' + Date.now());
+  await page.getByText("Create Record", { exact: true }).click();
 
-    await page.getByText('Confirm', {exact: true}).click();
+  const inputElement = await page.$('input[placeholder="Input record name"]');
 
-    await page.getByTitle('Import File').click();
+  await inputElement?.fill("Upload and play bag-" + Date.now());
 
-    await page.getByText('Link', {exact: true}).click();
+  await page.getByText("Confirm", { exact: true }).click();
 
-    const inputUrlElement = await page.$('input[placeholder="For example https://www.baidu.com/example.jpg"]');
+  await page.getByTitle("Import File").click();
 
-    await inputUrlElement?.fill('oss://coscene-playground/A - 上线必须回归文件集/压缩-bz2文件/GS_2023-01-04-20-26-19_103.bag');
+  await page.getByText("Link", { exact: true }).click();
 
-    await page.getByText('OK', {exact: true}).click();
+  const inputUrlElement = await page.$(
+    'input[placeholder="For example https://www.baidu.com/example.jpg"]'
+  );
 
-    await page.waitForTimeout(1000);
+  await inputUrlElement?.fill(
+    "oss://coscene-playground/A - 上线必须回归文件集/压缩-bz2文件/GS_2023-01-04-20-26-19_103.bag"
+  );
 
-    await page.getByRole('cell', { name: 'A - 上线必须回归文件集' }).getByText('A - 上线必须回归文件集').click()
+  await page.getByText("OK", { exact: true }).click();
 
-    await page.getByRole('cell', { name: '压缩-bz2文件' }).getByText('压缩-bz2文件').click()
+  await page.waitForTimeout(1000);
 
-    for(let i = 0; i < 10 * 60; i++) {
-        const tdTagCount = await page.$$eval('tr', (tds) => tds.length);
+  await page
+    .getByRole("cell", { name: "A - 上线必须回归文件集" })
+    .getByText("A - 上线必须回归文件集")
+    .click();
 
-        const activeElementCount = await page.getByText('Active', {exact: true}).all()
-        const failedElementCount = await page.getByText('Failed', {exact: true}).all()
+  await page
+    .getByRole("cell", { name: "压缩-bz2文件" })
+    .getByText("压缩-bz2文件")
+    .click();
 
-        expect(failedElementCount.length).toBe(0)
+  for (let i = 0; i < 10 * 60; i++) {
+    const tdTagCount = await page.$$eval("tr", (tds) => tds.length);
 
-        if(activeElementCount.length === 1) {
-            break
-        }
+    const activeElementCount = await page
+      .getByText("Active", { exact: true })
+      .all();
+    const failedElementCount = await page
+      .getByText("Failed", { exact: true })
+      .all();
 
-        await page.waitForTimeout(1000);
+    expect(failedElementCount.length).toBe(0);
+
+    if (activeElementCount.length === 1) {
+      break;
     }
 
-    const pagePromise = context.waitForEvent('page');
+    await page.waitForTimeout(1000);
+  }
 
-    await page.getByText('Play', {exact: true}).click();
+  const pagePromise = context.waitForEvent("page");
 
-    const newPage = await pagePromise
+  await page.getByText("Play", { exact: true }).click();
 
-    await expect(newPage.getByText('2023-01-048:26:19.319 PM CST')).toBeVisible();
-})
+  const newPage = await pagePromise;
+
+  await expect(newPage.getByText("2023-01-048:26:19.319 PM CST")).toBeVisible({
+    timeout: 5 * 60 * 1000,
+  });
+});
+
+const cases = [
+  {
+    name: "OSS - 新的bagzip",
+    url: "oss://coscene-playground/A - 上线必须回归文件集/需要实时更新/新的bagzip/",
+  },
+];
