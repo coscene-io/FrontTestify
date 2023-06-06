@@ -22,10 +22,10 @@ test.describe("Unzip and play bag", () => {
 
   test.beforeEach(async ({ page }) => {
     await page.goto("https://staging.coscene.cn/coscene-lark/e2e/records");
-    await page.evaluate(() => {
-      localStorage.setItem("coScene_org_jwt", process.env.CN_JWT);
+    await page.evaluate((jwt) => {
+      localStorage.setItem("coScene_org_jwt", jwt);
       localStorage.setItem("i18nextLng", "en");
-    });
+    }, process.env.CN_JWT);
     await page.goto("https://staging.coscene.cn/coscene-lark/e2e/records", {
       timeout: 3 * 60 * 1000,
     });

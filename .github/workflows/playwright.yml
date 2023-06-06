@@ -9,6 +9,8 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      CN_JWT: ${{ secrets.CN_JWT }}
     steps:
       - uses: actions/checkout@v3
       - name: Setup pnpm
@@ -24,7 +26,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: CN_JWT=${{ secrets.CN_JWT }} npx playwright test
+        run: npx playwright test
       - uses: actions/upload-artifact@v3
         if: always()
         with:
