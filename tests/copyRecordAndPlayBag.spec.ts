@@ -4,7 +4,7 @@ const cases = [
   {
     nameOfTheRecordBeingCopied: "Record for testing replication",
     projectName: "e2e",
-    bagStartTime: "2022-12-169:52:42.871 PM CST",
+    bagStartTime: "2022-12-16 9:52:42.871 PM CST",
     timeout: 5 * 60 * 1000, // 5 minutes
   },
 ];

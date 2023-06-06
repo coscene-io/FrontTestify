@@ -9,7 +9,7 @@ const cases = [
     decompressBtnRow:
       "gen-8851682833.bag.zip Workflow remote-file-for-record-gmrtz run and output 1 files Active 69.0 MiB Zip 2023-06-05 15:59:16",
     bagName: "gen-8851682833.bag",
-    bagStartTime: "2022-12-169:52:42.871 PM CST",
+    bagStartTime: "2022-12-16 9:52:42.871 PM CST",
   },
 ];
 

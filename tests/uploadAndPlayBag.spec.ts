@@ -74,7 +74,7 @@ test("Upload and play bag", async ({ page, context }) => {
 
   const newPage = await pagePromise;
 
-  await expect(newPage.getByText("2023-01-048:26:19.319 PM CST")).toBeVisible({
+  await expect(newPage.getByText("2023-01-04 8:26:19.319 PM CST")).toBeVisible({
     timeout: 5 * 60 * 1000,
   });
 });
