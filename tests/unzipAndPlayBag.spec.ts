@@ -1,10 +1,11 @@
+/** @format */
+
 import { expect, test } from "@playwright/test";
 
 const cases = [
   {
     name: "OSS - 新的bagzip",
     url: "oss://coscene-playground/A - 上线必须回归文件集/需要实时更新/新的bagzip/",
-    dirNames: ["A - 上线必须回归文件集", "需要实时更新", "新的bagzip"],
     timeout: 5 * 60 * 1000, // 5 minutes
   },
 ];
@@ -29,7 +30,13 @@ test.describe("Unzip and play bag", () => {
 
   for (let i = 0; i < cases.length; i++) {
     test("Unzip and play bag" + cases[i].name, async ({ page, context }) => {
-      const currentCase = cases[i];
+      const currentCase = { ...cases[i], dirNames: [] };
+      currentCase["dirNames"] = currentCase.url
+        .split("oss://coscene-playground/")
+        .pop()
+        .split("/")
+        .filter((item) => item);
+
       test.setTimeout(currentCase.timeout);
 
       await page.getByText("Create Record", { exact: true }).click();
