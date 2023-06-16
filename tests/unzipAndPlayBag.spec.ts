@@ -4,11 +4,7 @@ const cases = [
   {
     name: "OSS - 新的bagzip",
     url: "oss://coscene-playground/A - 上线必须回归文件集/需要实时更新/新的bagzip/",
-    dirNames: ["A - 上线必须回归文件集", "需要实时更新", "新的bagzip"],
     timeout: 5 * 60 * 1000, // 5 minutes
-    decompressBtnRow:
-      "gen-8851682833.bag.zip Workflow remote-file-for-record-gmrtz run and output 1 files Active 69.0 MiB Zip 2023-06-05 15:59:16",
-    bagName: "gen-8851682833.bag",
     bagStartTime: "2022-12-16 9:52:42.871 PM CST",
   },
 ];
@@ -33,7 +29,13 @@ test.describe("Unzip and play bag", () => {
 
   for (let i = 0; i < cases.length; i++) {
     test("Unzip and play bag" + cases[i].name, async ({ page, context }) => {
-      const currentCase = cases[i];
+      const currentCase = { ...cases[i], dirNames: [] };
+      currentCase["dirNames"] = currentCase.url
+        .split("oss://coscene-playground/")
+        .pop()
+        .split("/")
+        .filter((item) => item);
+
       test.setTimeout(currentCase.timeout);
 
       await page.getByText("Create Record", { exact: true }).click();
@@ -88,7 +90,7 @@ test.describe("Unzip and play bag", () => {
         await page.waitForTimeout(1000);
       }
 
-      await page.locator("td:nth-child(8) > .flex").getByRole("button").click();
+      await page.locator("td:nth-child(7) > .flex").getByRole("button").click();
 
       await page.getByText("Decompress", { exact: true }).click();
 
