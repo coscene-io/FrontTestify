@@ -88,7 +88,7 @@ test.describe("Unzip and play bag", () => {
         await page.waitForTimeout(1000);
       }
 
-      await page.locator("td:nth-child(8) > .flex").getByRole("button").click();
+      await page.locator("td:nth-child(7) > .flex").getByRole("button").click();
 
       await page.getByText("Decompress", { exact: true }).click();
 
