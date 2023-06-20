@@ -4,9 +4,11 @@ const cases = [
   {
     nameOfTheRecordBeingCopied: "Record for testing replication",
     projectName: "e2e",
-    timeout: 5 * 60 * 1000, // 5 minutes
   },
 ];
+
+const timeout = 5 * 60 * 1000;
+
 test.describe("Copy record and play bag", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("https://staging.coscene.cn/coscene-lark/e2e/records");
@@ -23,7 +25,7 @@ test.describe("Copy record and play bag", () => {
     const currentCase = cases[i];
 
     test("Copy record and play bag" + i, async ({ page, context }) => {
-      test.setTimeout(currentCase.timeout);
+      test.setTimeout(timeout);
 
       await page
         .getByPlaceholder("Search Name or Label")
