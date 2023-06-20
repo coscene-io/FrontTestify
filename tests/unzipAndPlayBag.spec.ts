@@ -58,7 +58,7 @@ test.describe("Unzip and play bag", () => {
         'input[placeholder="For example https://www.baidu.com/example.jpg"]'
       );
 
-      await inputUrlElement?.fill(currentCase.url);
+      await inputUrlElement?.fill("Unzip and play bag" + currentCase.name);
 
       await page.getByText("OK", { exact: true }).click();
 

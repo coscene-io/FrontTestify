@@ -98,7 +98,7 @@ for (let i = 0; i < cases.length; i++) {
 
     const inputElement = await page.$('input[placeholder="Input record name"]');
 
-    await inputElement?.fill("Upload and play bag-" + Date.now());
+    await inputElement?.fill("Upload and play bag-" + currentCase.name);
 
     await page.getByText("Confirm", { exact: true }).click();
 
