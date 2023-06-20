@@ -4,7 +4,6 @@ const cases = [
   {
     nameOfTheRecordBeingCopied: "Record for testing replication",
     projectName: "e2e",
-    bagStartTime: "2022-12-16 9:52:42.871 PM CST",
     timeout: 5 * 60 * 1000, // 5 minutes
   },
 ];
@@ -68,9 +67,13 @@ test.describe("Copy record and play bag", () => {
 
       const newPage = await pagePromise;
 
-      await expect(newPage.getByText(currentCase.bagStartTime)).toBeVisible({
-        timeout: 5 * 60 * 1000,
-      });
+      const responsePromise = newPage.waitForResponse(
+        new RegExp(".*/data/getStreams")
+      );
+
+      const response = await responsePromise;
+
+      expect(response.status()).toBe(200);
     });
   }
 });

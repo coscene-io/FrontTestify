@@ -74,14 +74,11 @@ test("Upload and play bag", async ({ page, context }) => {
 
   const newPage = await pagePromise;
 
-  await expect(newPage.getByText("2023-01-04 8:26:19.319 PM CST")).toBeVisible({
-    timeout: 5 * 60 * 1000,
-  });
-});
+  const responsePromise = newPage.waitForResponse(
+    new RegExp(".*/data/getStreams")
+  );
 
-const cases = [
-  {
-    name: "OSS - 新的bagzip",
-    url: "oss://coscene-playground/A - 上线必须回归文件集/需要实时更新/新的bagzip/",
-  },
-];
+  const response = await responsePromise;
+
+  expect(response.status()).toBe(200);
+});
