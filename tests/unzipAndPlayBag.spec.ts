@@ -4,9 +4,10 @@ const cases = [
   {
     name: "OSS - 新的bagzip",
     url: "oss://coscene-playground/A - 上线必须回归文件集/需要实时更新/新的bagzip/",
-    timeout: 5 * 60 * 1000, // 5 minutes
   },
 ];
+
+const timeout = 5 * 60 * 1000;
 
 test.describe("Unzip and play bag", () => {
   const casesNames = new Set(cases.filter((item) => item.name));
@@ -35,7 +36,7 @@ test.describe("Unzip and play bag", () => {
         .split("/")
         .filter((item) => item);
 
-      test.setTimeout(currentCase.timeout);
+      test.setTimeout(timeout);
 
       await page.getByText("Create Record", { exact: true }).click();
 
