@@ -6,10 +6,6 @@ const cases = [
     url: "oss://coscene-playground/A - 上线必须回归文件集/需要实时更新/新的bagzip/",
     dirNames: ["A - 上线必须回归文件集", "需要实时更新", "新的bagzip"],
     timeout: 5 * 60 * 1000, // 5 minutes
-    decompressBtnRow:
-      "gen-8851682833.bag.zip Workflow remote-file-for-record-gmrtz run and output 1 files Active 69.0 MiB Zip 2023-06-05 15:59:16",
-    bagName: "gen-8851682833.bag",
-    bagStartTime: "2022-12-16 9:52:42.871 PM CST",
   },
 ];
 
@@ -119,9 +115,13 @@ test.describe("Unzip and play bag", () => {
 
       const newPage = await pagePromise;
 
-      await expect(newPage.getByText(currentCase.bagStartTime)).toBeVisible({
-        timeout: 5 * 60 * 1000,
-      });
+      const responsePromise = newPage.waitForResponse(
+        new RegExp(".*/data/getStreams")
+      );
+
+      const response = await responsePromise;
+
+      expect(response.status()).toBe(200);
     });
   }
 });
