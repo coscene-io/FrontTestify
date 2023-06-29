@@ -63,10 +63,6 @@ const cases = [
     name: "OSS - 新的bag",
     url: "oss://coscene-playground/A - 上线必须回归文件集/需要实时更新/新的bag/",
   },
-  {
-    name: "OSS - 新的bagzip",
-    url: "oss://coscene-playground/A - 上线必须回归文件集/需要实时更新/新的bagzip/",
-  },
 ];
 
 const timeout = 5 * 60 * 1000;
