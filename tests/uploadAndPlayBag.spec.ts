@@ -76,11 +76,11 @@ const cases = [
     url: "oss://coscene-playground/A - 上线必须回归文件集/需要实时更新/新的bag/",
     noDir: false,
   },
-  {
-    name: "GS-new",
-    url: "https://tempo-prod-cn-shanghai-dogfish.oss-cn-shanghai.aliyuncs.com/2023/6/28/21/GS100-0210-77N-F000/e59e46b8-6541-4e57-b727-618bb9bafef5/GS_2023-06-29-05-11-59_313.bag?Expires=1688052199&OSSAccessKeyId=LTAI5t6N9Z4oqKAoLT41oMyR&Signature=bavfFMtMsClaCGpGgiB3oNOeJjc%3D&response-content-type=application%2Foctet-stream",
-    noDir: false,
-  },
+  // {
+  //   name: "GS-new",
+  //   url: "https://tempo-prod-cn-shanghai-dogfish.oss-cn-shanghai.aliyuncs.com/2023/6/28/21/GS100-0210-77N-F000/e59e46b8-6541-4e57-b727-618bb9bafef5/GS_2023-06-29-05-11-59_313.bag?Expires=1688052199&OSSAccessKeyId=LTAI5t6N9Z4oqKAoLT41oMyR&Signature=bavfFMtMsClaCGpGgiB3oNOeJjc%3D&response-content-type=application%2Foctet-stream",
+  //   noDir: false,
+  // },
   {
     name: "record - 单个链接",
     url: "https://storage-cn-hangzhou.staging.coscene.cn/default/blobs/da992666f3af3cb81877d5a00b1adbf2639ec4f46126d330b9c2da05fafa45c5?X-Amz-Checksum-Sha256=da992666f3af3cb81877d5a00b1adbf2639ec4f46126d330b9c2da05fafa45c5&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=coscene%2F20230629%2Fcn-hangzhou%2Fs3%2Faws4_request&X-Amz-Date=20230629T072025Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=5457d30e0a5595cc7550e1bcdf1fab0653ab1ce7db35f2483342fa3615689f3f&X-Amz-Tagging=x-cos-organization-id%3Dcf746e23-3210-4b8f-bdfa-fb771d1ac87c%26x-cos-user-id%3D4c3fe4a5-b86d-441d-b237-eb2b4ecd9139&response-content-disposition=attachment%3B%20filename%3D001.bag",
