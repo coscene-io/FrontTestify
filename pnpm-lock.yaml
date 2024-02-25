@@ -15,7 +15,7 @@ devDependencies:
     version: 1.37.1
   '@types/node':
     specifier: ^20.5.7
-    version: 20.5.7
+    version: 20.11.20
 
 packages:
 
@@ -24,14 +24,16 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
-      '@types/node': 20.5.7
+      '@types/node': 20.11.20
       playwright-core: 1.37.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
 
-  /@types/node@20.5.7:
-    resolution: {integrity: sha512-dP7f3LdZIysZnmvP3ANJYTSwg+wLLl8p7RqniVlV7j+oXSXAbt9h0WIBFmJy5inWZoX9wZN6eXx+YXd9Rh3RBA==}
+  /@types/node@20.11.20:
+    resolution: {integrity: sha512-7/rR21OS+fq8IyHTgtLkDK949uzsa6n8BkziAKtPVpugIkO6D+/ooXMvzXxDnZrmtXVfjb1bKQafYpb8s89LOg==}
+    dependencies:
+      undici-types: 5.26.5
     dev: true
 
   /dotenv@16.0.3:
@@ -51,4 +53,8 @@ packages:
     resolution: {integrity: sha512-17EuQxlSIYCmEMwzMqusJ2ztDgJePjrbttaefgdsiqeLWidjYz9BxXaTaZWxH1J95SHGk6tjE+dwgWILJoUZfA==}
     engines: {node: '>=16'}
     hasBin: true
+    dev: true
+
+  /undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
     dev: true
